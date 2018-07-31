@@ -1,0 +1,48 @@
+<div fxLayout="row" fxFlex>
+  <mat-card fxLayout="column" fxFlex>
+    <mat-card-title fxLayout="row" fxLayoutAlign="start center">
+      <img src="https://jef.binomed.fr/assets/2016-12-legonnary/firebase-authentication-logo1.png">
+      <span style="color: #757575; font-weight: 400; font-size: 20px;">Firebase Authentication</span>
+    </mat-card-title>
+    <mat-card-content>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header fxLayout="row" fxLayoutAlign="center center">
+            <div fxLayout="row" fxLayoutAlign="center center">
+              <mat-icon style="margin-right: 10px;">notes</mat-icon>
+              <h2>Infos</h2>
+            </div>
+          </mat-expansion-panel-header>
+          <div fxLayout="column" style="padding: 0 24px;">
+            <p>This addon uses
+              <span class="highlight">firebase-admin</span> npm package.
+            </p>
+            <p>If you are using Firebase Authentication in your application and want to secure your backend this addon is for
+              you. This addon provide a custom permission to inject the unique firebase user Id with your authorization token.</p>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <div fxLayout="row" fxLayoutAlign="center center">
+              <mat-icon style="margin-right: 10px;">supervisor_account</mat-icon>
+              <h2>
+                <span [matBadge]="users?.length || 0" matBadgeOverlap="false">
+                  Users
+                </span>
+              </h2>
+            </div>
+          </mat-expansion-panel-header>
+          <mat-list>
+            <mat-list-item *ngFor="let user of users">
+              <img [src]="user.photoURL" mat-list-icon>
+              <h4 mat-line>{{user.email}}</h4>
+              <div mat-line fxLayout="row" fxLayoutAlign="start center">
+                <span>{{ user.providerData[0]?.providerId }}</span>
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+  </mat-card>
+</div>

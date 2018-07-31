@@ -1,5 +1,5 @@
 {
-  "name": "@materia/materia-firebase-authentication",
+  "name": "@materia/firebase-authentication",
   "version": "1.0.0",
   "description": "",
   "repository": {
@@ -20,8 +20,8 @@
     "start": "ng serve",
     "test": "ng test",
     "build:prod": "npm run clean && npm run build:client && npm run build:server && npm run postbuild",
-    "build:server": "tsc -p ./tsconfig.server.json",
-    "build:client": "ng build --prod addon-boilerplate",
+    "build:server": "tsc -p ./tsconfig.server.json &&  ncp ./server/models ./dist/server/models",
+    "build:client": "ng build --prod",
     "postbuild": "node scripts/postbuild.js",
     "clean": "rimraf dist"
   },

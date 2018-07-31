@@ -1,0 +1,33 @@
+:host {
+	flex: 1;
+	display: flex;
+}
+
+mat-card {
+	margin: 8px;
+	padding: 15px;
+}
+
+img {
+	height: 50px;
+	margin-right: 10px;
+}
+
+.highlight {
+	font-weight: 200;
+	color: darkred;
+	background: lightgray;
+	padding: 5px;
+}
+
+mat-icon {
+	margin: 2px 8px;
+}
+.no-users {
+	font-style: italic;
+}
+
+:host::ng-deep.mat-content {
+	align-items: center;
+	height: 50px;
+}

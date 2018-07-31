@@ -17,7 +17,7 @@ const fields = [
 fields.forEach(field => {
     pkg[field] = `client/${pkg[field]}`
 })
-
+delete pkg.devDependencies;
 fs.writeFileSync(path.join(__dirname, '..', 'dist', 'package.json'), JSON.stringify(pkg, null, 2), {
     encoding: 'utf-8'
 });

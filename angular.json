@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "addon-boilerplate": {
+    "firebase-authentication": {
       "root": "",
       "sourceRoot": "",
       "projectType": "library",
@@ -44,5 +44,5 @@
       }
     }
   },
-  "defaultProject": "addon-boilerplate"
+  "defaultProject": "firebase-authentication"
 }

@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import {
   MatButtonModule,
@@ -9,13 +12,32 @@ import {
   MatCardModule,
   MatIconModule,
   MatDialogModule,
-  MatInputModule
+  MatInputModule,
+  MatDividerModule,
+  MatListModule,
+  MatExpansionModule,
+  MatBadgeModule
 } from '@angular/material';
+
+export const UI_MODULES = [
+  MatButtonModule,
+  MatRippleModule,
+  MatSnackBarModule,
+  MatCardModule,
+  MatIconModule,
+  MatDialogModule,
+  MatInputModule,
+  MatDividerModule,
+  MatListModule,
+  MatExpansionModule,
+  MatBadgeModule,
+
+  FlexLayoutModule
+];
 
 import { Addon } from '@materia/addons';
 
-import { AddonViewComponent } from './addon-view/addon-view.component';
-import { AddonSetupComponent } from './addon-setup/addon-setup.component';
+import { FirebaseAuthenticationComponent } from './firebase-authentication/firebase-authentication.component';
 
 @Addon('@materia/firebase-authentication')
 @NgModule({
@@ -23,16 +45,10 @@ import { AddonSetupComponent } from './addon-setup/addon-setup.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatRippleModule,
-    MatButtonModule,
-    MatSnackBarModule,
-    MatCardModule,
-    MatIconModule,
-    MatDialogModule,
-    MatInputModule
+    HttpClientModule,
+    ...UI_MODULES
   ],
-  declarations: [AddonViewComponent, AddonSetupComponent],
-  exports: [AddonViewComponent, AddonSetupComponent],
-  entryComponents: [AddonSetupComponent]
+  declarations: [FirebaseAuthenticationComponent],
+  exports: [FirebaseAuthenticationComponent]
 })
 export class FirebaseAuthenticationModule {}

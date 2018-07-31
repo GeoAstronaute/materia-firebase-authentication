@@ -1,0 +1,172 @@
+{
+  "virtual": true,
+  "fields": [
+    {
+			"name": "uid",
+			"type": "text",
+			"read": true,
+			"primary": true,
+			"unique": true,
+			"component": "input"
+    },
+    {
+			"name": "email",
+			"type": "text",
+			"read": true,
+			"primary": true,
+			"unique": true,
+			"component": "input"
+    },
+    {
+			"name": "emailVerified",
+			"type": "boolean",
+			"read": true,
+			"component": "switch"
+    },
+    {
+			"name": "displayName",
+			"type": "text",
+			"read": true,
+			"component": "input"
+    },
+    {
+			"name": "photoUrl",
+			"type": "text",
+			"read": true,
+			"component": "input"
+    },
+    {
+			"name": "disabled",
+			"type": "boolean",
+			"read": true,
+			"component": "switch"
+    }
+  ],
+  "relations": [],
+  "queries": [
+    {
+      "id": "list",
+      "type": "custom",
+      "opts": {
+        "params": [],
+        "action": "getAllUsers",
+        "model": "firebase-authentication"
+      }
+    },{
+      "id": "getAllUsers",
+      "type": "custom",
+      "opts": {
+        "params": [],
+        "action": "getAllUsers",
+        "model": "firebase-authentication"
+      }
+    },
+    {
+      "id": "getUsers",
+      "type": "custom",
+      "opts": {
+        "params": [],
+        "action": "getUsers",
+        "model": "firebase-authentication"
+      }
+    },
+    {
+      "id": "getUser",
+      "type": "custom",
+      "opts": {
+        "params": [{
+          "name": "uid",
+          "type": "text",
+          "required": true,
+          "component": "input"
+        }],
+        "action": "getUser",
+        "model": "firebase-authentication"
+      }
+    },
+    {
+      "id": "getUserByEmail",
+      "type": "custom",
+      "opts": {
+        "params": [{
+          "name": "email",
+          "type": "text",
+          "required": true,
+          "component": "email"
+        }],
+        "action": "getUserByEmail",
+        "model": "firebase-authentication"
+      }
+    },
+    {
+      "id": "deleteUser",
+      "type": "custom",
+      "opts": {
+        "params": [{
+          "name": "uid",
+          "type": "text",
+          "required": true,
+          "component": "input"
+        }],
+        "action": "deleteUser",
+        "model": "firebase-authentication"
+      }
+    },
+    {
+      "id": "updateUser",
+      "type": "custom",
+      "opts": {
+        "params": [{
+          "name": "uid",
+          "type": "text",
+          "required": true,
+          "component": "input"
+        },
+        {
+          "name": "email",
+          "type": "text",
+          "required": false,
+          "component": "email"
+        },
+        {
+          "name": "emailVerified",
+          "type": "boolean",
+          "required": false,
+          "component": "switch"
+        },
+        {
+          "name": "phoneNumber",
+          "type": "text",
+          "required": false,
+          "component": "input"
+        },
+        {
+          "name": "password",
+          "type": "text",
+          "required": false,
+          "component": "password"
+        },
+        {
+          "name": "displayName",
+          "type": "text",
+          "required": false,
+          "component": "input"
+        },
+        {
+          "name": "photoUrl",
+          "type": "text",
+          "required": false,
+          "component": "input"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "component": "switch"
+        }],
+        "action": "updateUser",
+        "model": "firebase-authentication"
+      }
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 /*
- * Public API Surface of addon-material
+ * Public API Surface of materia firebase-authentication addon front-end
  */
 
-export * from './addon-view/addon-view.component';
-export * from './addon-setup/addon-setup.component';
+export * from './firebase-authentication/firebase-authentication.component';
 export * from './firebase-authentication.module';
+export * from './models/firebase-user.model';
