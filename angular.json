@@ -7,7 +7,7 @@
       "root": "",
       "sourceRoot": "",
       "projectType": "library",
-      "prefix": "materia",
+      "prefix": "fa",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -44,5 +44,10 @@
       }
     }
   },
-  "defaultProject": "firebase-authentication"
+  "defaultProject": "firebase-authentication",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
