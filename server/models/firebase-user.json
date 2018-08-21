@@ -167,6 +167,63 @@
         "action": "updateUser",
         "model": "firebase-authentication"
       }
+    },
+    {
+      "id": "createUser",
+      "type": "custom",
+      "opts": {
+        "params": [
+          {
+          "name": "uid",
+          "type": "text",
+          "required": false,
+          "component": "input"
+        },
+        {
+          "name": "email",
+          "type": "text",
+          "required": true,
+          "component": "email"
+        },
+        {
+          "name": "emailVerified",
+          "type": "boolean",
+          "required": false,
+          "component": "switch"
+        },
+        {
+          "name": "phoneNumber",
+          "type": "text",
+          "required": false,
+          "component": "input"
+        },
+        {
+          "name": "password",
+          "type": "text",
+          "required": true,
+          "component": "password"
+        },
+        {
+          "name": "displayName",
+          "type": "text",
+          "required": false,
+          "component": "input"
+        },
+        {
+          "name": "photoUrl",
+          "type": "text",
+          "required": false,
+          "component": "input"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "component": "switch"
+        }],
+        "action": "createUser",
+        "model": "firebase-authentication"
+      }
     }
   ]
 }

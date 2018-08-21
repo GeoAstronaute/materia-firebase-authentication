@@ -55,6 +55,19 @@ class FirebaseAuthenticationModel {
         .catch((err) => err);
     }
 
+    createUser(params) {
+        const data = params;
+        return admin.auth().createUser(data/*{
+            email: "user@example.com",
+            emailVerified: false,
+            phoneNumber: "+11234567890",
+            password: "secretPassword",
+            displayName: "John Doe",
+            photoURL: "http://www.example.com/12345678/photo.png",
+            disabled: false
+          }*/)
+    }
+
     updateUser(params) {
         const uid = params.uid;
         const data = params;
