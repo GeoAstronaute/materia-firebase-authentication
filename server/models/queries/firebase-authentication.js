@@ -12,9 +12,6 @@ class FirebaseAuthenticationModel {
 
     list(nextPageToken, precedentListUsersResult) {
         return admin.auth().listUsers(1000, nextPageToken).then((listUsersResult) => {
-            listUsersResult.users.forEach((userRecord) => {
-                console.log('user', userRecord.toJSON());
-            });
             if (precedentListUsersResult) {
                 listUsersResult.users = [...precedentListUsersResult.users, ...listUsersResult.users]
             }
@@ -30,9 +27,6 @@ class FirebaseAuthenticationModel {
         const nextPageToken = params.nextPageToken;
         return admin.auth().listUsers(1000, nextPageToken)
             .then((listUsersResult) => {
-                listUsersResult.users.forEach((userRecord) => {
-                    console.log('user', userRecord.toJSON());
-                });
                 return listUsersResult.users;
             })
             .catch((error) => {
