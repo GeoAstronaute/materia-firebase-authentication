@@ -16,7 +16,12 @@ import {
   MatDividerModule,
   MatListModule,
   MatExpansionModule,
-  MatBadgeModule
+  MatBadgeModule,
+  MatMenuModule,
+  MatTooltipModule,
+  MatSlideToggleModule,
+  MatToolbarModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 export const UI_MODULES = [
@@ -31,6 +36,11 @@ export const UI_MODULES = [
   MatListModule,
   MatExpansionModule,
   MatBadgeModule,
+  MatTooltipModule,
+  MatProgressSpinnerModule,
+  MatSlideToggleModule,
+  MatToolbarModule,
+  MatMenuModule,
 
   FlexLayoutModule
 ];
@@ -38,6 +48,9 @@ export const UI_MODULES = [
 import { Addon } from '@materia/addons';
 
 import { FirebaseAuthenticationComponent } from './firebase-authentication/firebase-authentication.component';
+import { GetStartedComponent } from './firebase-authentication/get-started/get-started.component';
+import { UserFormComponent } from './dialogs/user-form/user-form.component';
+import { ConfirmModalComponent } from './dialogs/confirm-modal';
 
 @Addon('@materia/firebase-authentication')
 @NgModule({
@@ -48,7 +61,7 @@ import { FirebaseAuthenticationComponent } from './firebase-authentication/fireb
     HttpClientModule,
     ...UI_MODULES
   ],
-  declarations: [FirebaseAuthenticationComponent],
+  declarations: [FirebaseAuthenticationComponent, GetStartedComponent, UserFormComponent, ConfirmModalComponent],
   exports: [FirebaseAuthenticationComponent]
 })
 export class FirebaseAuthenticationModule {}

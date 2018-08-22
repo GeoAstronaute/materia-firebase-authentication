@@ -1,0 +1,35 @@
+<ng-template #userForm>
+  <mat-toolbar color="primary">
+    {{ edit ? 'Edit' : 'New user' }}
+  </mat-toolbar>
+  <form fxLayout="column" [formGroup]="form">
+    <mat-form-field *ngIf=" ! edit">
+      <input matInput placeholder="User id" formControlName="uid">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Password" type="password" formControlName="password">
+    </mat-form-field>
+    <mat-slide-toggle formControlName="emailVerified">
+      Email verified
+    </mat-slide-toggle>
+    <mat-form-field>
+      <input matInput placeholder="Display name" formControlName="displayName">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Phone number" formControlName="phoneNumber">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Photo url" formControlName="photoURL">
+    </mat-form-field>
+    <mat-slide-toggle formControlName="disabled">
+      Account disabled
+    </mat-slide-toggle>
+    <div fxLayout="row" fxLayoutAlign="center center" class="footer">
+      <button mat-raised-button color="primary" (click)="save.emit(form.value)">SAVE</button>
+      <button mat-raised-button (click)="close.emit()">CANCEL</button>
+    </div>
+  </form>
+</ng-template>

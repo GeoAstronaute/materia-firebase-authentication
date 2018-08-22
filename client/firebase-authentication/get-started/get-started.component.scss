@@ -1,0 +1,22 @@
+strong {
+	cursor: pointer;
+	color: darkblue;
+}
+.subtitle {
+	font-weight: 400;
+	font-size: 15px;
+	margin-top: 10px;
+	text-decoration: underline;
+}
+ul {
+	padding: 0 10px;
+	li {
+		margin: 5px 0;
+	}
+}
+.highlight {
+	font-weight: 200;
+	color: darkred;
+	background: lightgray;
+	padding: 5px;
+}

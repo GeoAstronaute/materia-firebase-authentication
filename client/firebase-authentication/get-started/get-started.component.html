@@ -1,0 +1,41 @@
+<div fxLayout="column" style="padding: 0 24px;">
+  <h1 style="color: #757575; font-weight: 400; font-size: 18px;">Prerequisites</h1>
+  <div style="margin: 10px 0;">This addon uses
+    <span class="highlight">firebase-admin</span> npm package under the hood.
+  </div>
+  <div>
+    To use the Firabase Authentication Addon for Materia Designer, you'll need a Firebase project, a configuration file with
+    your service account's credentials and a firabase database URL.
+  </div>
+  <div style="margin-top: 10px;">
+    <span class="subtitle">Create Firebase project</span>
+    <p>If you don't already have a Firebase project, add one in the
+      <strong (click)="openInBrowser.emit('https://console.firebase.google.com')">Firebase console
+      </strong>. The Add project dialog also gives you the option to add Firebase to an existing Google Cloud Platform project.
+    </p>
+
+    <span class="subtitle">Service account credential</span>
+    <ul>
+      <li>- Navigate to the
+        <strong (click)="openInBrowser.emit('https://console.firebase.google.com/project/_/settings/serviceaccounts/adminsdk')">Service Accounts
+        </strong> tab in your project's settings page.</li>
+      <li>- Click the Generate New Private Key button at the bottom of the Firebase Admin SDK section of the Service Accounts
+        tab. After you click the button, a JSON file containing your service account's credentials will be downloaded. You'll
+        need this to initialize the addon.</li>
+    </ul>
+  </div>
+  <div fxLayout="column">
+    <span class="subtitle">Database URL</span>
+    <code [innerHtml]="'  https://{ DATABASE_NAME }.firebaseio.com'"></code>
+    <p>You can find your database name on the Database page of your
+      <strong (click)="openInBrowser.emit('https://console.firebase.google.com/')">Firebase console
+      </strong> project.</p>
+  </div>
+</div>
+<div fxLayout="column" style="padding: 0 24px;">
+  <h1 style="color: #757575; font-weight: 400; font-size: 18px;">Fill addon settings</h1>
+  <div>Once you have a Firebase project and a JSON service accounts's credential copy/paste this file in your materia project
+    and
+    <strong (click)="openSetup.emit()">fill the settings</strong>
+  </div>
+</div>

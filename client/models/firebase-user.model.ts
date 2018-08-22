@@ -6,6 +6,7 @@ export interface FirebaseUser {
     displayName: string;
     photoURL: string;
     disabled: boolean;
+    password?: string;
     metadata?: any;
     providerData?: any;
     tokensValidAfterTime?: string;

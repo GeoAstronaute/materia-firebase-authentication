@@ -2,47 +2,60 @@
   <mat-card fxLayout="column" fxFlex>
     <mat-card-title fxLayout="row" fxLayoutAlign="start center">
       <img src="https://jef.binomed.fr/assets/2016-12-legonnary/firebase-authentication-logo1.png">
-      <span style="color: #757575; font-weight: 400; font-size: 20px;">Firebase Authentication</span>
+      <span class="main-title">Firebase Authentication</span>
     </mat-card-title>
-    <mat-card-content>
-      <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header fxLayout="row" fxLayoutAlign="center center">
-            <div fxLayout="row" fxLayoutAlign="center center">
-              <mat-icon style="margin-right: 10px;">notes</mat-icon>
-              <h2>Infos</h2>
-            </div>
-          </mat-expansion-panel-header>
-          <div fxLayout="column" style="padding: 0 24px;">
-            <p>This addon uses
-              <span class="highlight">firebase-admin</span> npm package.
-            </p>
-            <p>If you are using Firebase Authentication in your application and want to secure your backend this addon is for
-              you. This addon provide a custom permission to inject the unique firebase user Id with your authorization token.</p>
+    <mat-card-content fxFlex fxLayout="column" style="overflow: auto;">
+      <mat-toolbar *ngIf="hasSettings" fxLayout="row" fxLayoutAlign="start center" color="primary" style="min-height: 50px; height: 50px;">
+        <mat-icon style="margin: 0 5px;">supervisor_account</mat-icon>
+        <h2 style="margin: 0" fxFlex>
+          <span [matBadge]="users?.length || 0" matBadgeOverlap="false" matBadgeColor="accent">
+            Users
+          </span>
+        </h2>
+        <button mat-mini-fab matTooltip="New user" matTooltipPosition="left" style="margin: 0 5px;" (click)="newUser()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-toolbar>
+      <mat-list fxFlex *ngIf="hasSettings && ! loadingUsers && users && users.length" style="overflow: auto;">
+        <mat-list-item *ngFor="let user of users" style="position: relative">
+          <img [src]="user.photoURL ? user.photoURL : 'https://www.qualiscare.com/wp-content/uploads/2017/08/default-user.png'" mat-list-icon>
+          <h4 mat-line>{{user.email}}</h4>
+          <div mat-line fxLayout="row" fxLayoutAlign="start center">
+            <img [src]="providerIcons[user.providerData[0]?.providerId]" alt="Provider icon">
+            <span>{{ user.providerData[0]?.providerId === 'password' ? 'email/password' :  user.providerData[0]?.providerId }}</span>
           </div>
-        </mat-expansion-panel>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <div fxLayout="row" fxLayoutAlign="center center">
-              <mat-icon style="margin-right: 10px;">supervisor_account</mat-icon>
-              <h2>
-                <span [matBadge]="users?.length || 0" matBadgeOverlap="false">
-                  Users
-                </span>
-              </h2>
-            </div>
-          </mat-expansion-panel-header>
-          <mat-list>
-            <mat-list-item *ngFor="let user of users">
-              <img [src]="user.photoURL" mat-list-icon>
-              <h4 mat-line>{{user.email}}</h4>
-              <div mat-line fxLayout="row" fxLayoutAlign="start center">
-                <span>{{ user.providerData[0]?.providerId }}</span>
-              </div>
-            </mat-list-item>
-          </mat-list>
-        </mat-expansion-panel>
-      </mat-accordion>
+          <div style="position: absolute; right: 16px;" fxLayout="column" fxLayoutAlign="center center">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="editUser(user)">
+                <mat-icon>edit</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item (click)="user.disabled ? enableUser(user) : disableUser(user)">
+                  <mat-icon>{{ user.disabled ? 'check_circle_outline' : 'highlight_off' }}</mat-icon>
+                  <span>{{user.disabled ? 'Enable account' : 'Disable account'}}</span>
+              </button>
+              <button mat-menu-item (click)="deleteUser(user)">
+                  <mat-icon>delete</mat-icon>
+                  <span>Delete</span>
+              </button>
+            </mat-menu>
+          </div>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+      <div fxFlex *ngIf="hasSettings && ! loadingUsers && (! users || (users && ! users.length))" fxLayout="column" fxLayoutAlign="center center">
+        <span>You haven't any users yet</span>
+      </div>  
+      <div fxFlex *ngIf="hasSettings && loadingUsers" fxLayout="column" fxLayoutAlign="center center">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+      </div>
+      <fa-get-started *ngIf="! hasSettings" (openInBrowser)="openInBrowser.emit($event)"
+        (openSetup)="openSetup.emit($event)"></fa-get-started>
     </mat-card-content>
   </mat-card>
 </div>
+<fa-user-form [edit]="userEdition" [user]="currentUser" (close)="closeUserDialog()" (save)="userEdition ? updateUser($event) : createUser($event)"></fa-user-form>
+<fa-confirm-modal></fa-confirm-modal>
