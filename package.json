@@ -4,14 +4,14 @@
   "description": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/geoastronaute/materia-firebase-authentication.git"
+    "url": "git+https://github.com/GeoAstronaute/materia-firebase-authentication.git"
   },
-  "author": "jeanmarc.royy@gmail.com",
+  "author": "geoastronaute@getmateria.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/geoastronaute/materia-firebase-authentication/issues"
+    "url": "https://github.com/GeoAstronaute/materia-firebase-authentication/issues"
   },
-  "homepage": "https://github.com/geoastronaute/materia-firebase-authentication#readme",
+  "homepage": "https://github.com/GeoAstronaute/materia-firebase-authentication#readme",
   "scripts": {
     "build": "ng build",
     "e2e": "ng e2e",
