@@ -6,6 +6,7 @@
   },
   "whitelistedNonPeerDependencies": [
     "tslib",
-    "firebase-admin"
+    "firebase-admin",
+    "@firebase/app-types"
   ]
 }
