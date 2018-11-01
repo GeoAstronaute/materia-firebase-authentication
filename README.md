@@ -24,8 +24,8 @@ Restart Materia Designer
 Clone this repository:
 
 ```
-git clone git@github.com:geoastronaute/materia-firebase-authentication.git
-cd materia-addon-boilerplate
+git clone git@github.com:materiahq/materia-firebase-authentication.git
+cd materia-firebase-authentication
 ```
 
 Then install dependencies and build:
@@ -52,4 +52,4 @@ and in your materia application
 npm link @materia/firebase-authentication
 ```
 
-then add `"@materia/firebase-authentication": "^0.1.0"` in the dependencies of the package.json - it will let Materia knows of the existance of the addon.
+then add `"@materia/firebase-authentication"` in the links array of the materia.json configuration file - it will let Materia knows of the existance of the addon.
