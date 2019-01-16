@@ -4,7 +4,7 @@ import * as path from 'path';
 export default class FirebaseAuthentication {
     public static initialize: boolean;
     public static displayName = 'Firebase Authentication';
-    public static logo = 'https://jef.binomed.fr/assets/2016-12-legonnary/firebase-authentication-logo1.png';
+    public static logo = 'https://raw.githubusercontent.com/materiahq/materia-website-content/master/logo/addons/firebase-authentication.png';
 
 
     public static installSettings = [{
