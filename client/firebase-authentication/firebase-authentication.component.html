@@ -5,7 +5,7 @@
       <span class="main-title">Firebase Authentication Addon</span>
     </mat-toolbar>
     <mat-card-content fxFlex fxLayout="column" style="overflow: auto;">
-      <mat-toolbar *ngIf="hasSettings" fxLayout="row" fxLayoutAlign="start center" color="primary" style="min-height: 50px; height: 50px;">
+      <mat-toolbar *ngIf="hasSettings && ! firstLoad && ! firebaseError" fxLayout="row" fxLayoutAlign="start center" color="primary" style="min-height: 50px; height: 50px;">
         <mat-icon style="margin: 0 5px;">supervisor_account</mat-icon>
         <h2 style="margin: 0" fxFlex>
           <span [matBadge]="users?.length || 0" matBadgeOverlap="false" matBadgeColor="accent">
@@ -16,46 +16,66 @@
           <mat-icon>add</mat-icon>
         </button>
       </mat-toolbar>
-      <mat-list fxFlex *ngIf="hasSettings && ! loadingUsers && users && users.length" style="overflow: auto;">
-        <mat-list-item *ngFor="let user of users" style="position: relative">
-          <img [src]="user.photoURL ? user.photoURL : 'https://www.qualiscare.com/wp-content/uploads/2017/08/default-user.png'" mat-list-icon>
-          <h4 mat-line>{{user.email}}</h4>
-          <div mat-line fxLayout="row" fxLayoutAlign="start center">
-            <img [src]="providerIcons[user.providerData[0]?.providerId]" alt="Provider icon">
-            <span>{{ user.providerData[0]?.providerId === 'password' ? 'email/password' :  user.providerData[0]?.providerId }}</span>
-          </div>
-          <div style="position: absolute; right: 16px;" fxLayout="column" fxLayoutAlign="center center">
-            <button mat-icon-button [matMenuTriggerFor]="menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="editUser(user)">
-                <mat-icon>edit</mat-icon>
-                <span>Edit</span>
-              </button>
-              <button mat-menu-item (click)="user.disabled ? enableUser(user) : disableUser(user)">
-                  <mat-icon>{{ user.disabled ? 'check_circle_outline' : 'highlight_off' }}</mat-icon>
-                  <span>{{user.disabled ? 'Enable account' : 'Disable account'}}</span>
-              </button>
-              <button mat-menu-item (click)="deleteUser(user)">
-                  <mat-icon>delete</mat-icon>
-                  <span>Delete</span>
-              </button>
-            </mat-menu>
-          </div>
-          <mat-divider></mat-divider>
-        </mat-list-item>
-      </mat-list>
-      <div fxFlex *ngIf="hasSettings && ! loadingUsers && (! users || (users && ! users.length))" fxLayout="column" fxLayoutAlign="center center">
-        <span>You haven't any users yet</span>
-      </div>  
-      <div fxFlex *ngIf="hasSettings && loadingUsers" fxLayout="column" fxLayoutAlign="center center">
-        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-      </div>
-      <fa-get-started *ngIf="! hasSettings" (openInBrowser)="openInBrowser.emit($event)"
-        (openSetup)="openSetup.emit($event)"></fa-get-started>
+      <ng-container *ngIf="hasSettings; else noSettingsTemplate">
+        <ng-container *ngIf="! loadingUsers; else loadingTemplate">
+            <ng-container *ngIf="! firebaseError; else firebaseErrorTemplate">
+                <ng-container *ngIf="users && users.length; else noUsersTemplate">
+                    <mat-list fxFlex  style="overflow: auto;">
+                        <mat-list-item *ngFor="let user of users" style="position: relative">
+                          <img [src]="user.photoURL ? user.photoURL : 'https://www.qualiscare.com/wp-content/uploads/2017/08/default-user.png'" mat-list-icon>
+                          <h4 mat-line>{{user.email}}</h4>
+                          <div mat-line fxLayout="row" fxLayoutAlign="start center">
+                            <img [src]="providerIcons[user.providerData[0]?.providerId]" alt="Provider icon">
+                            <span>{{ user.providerData[0]?.providerId === 'password' ? 'email/password' :  user.providerData[0]?.providerId }}</span>
+                          </div>
+                          <div style="position: absolute; right: 16px;" fxLayout="column" fxLayoutAlign="center center">
+                            <button mat-icon-button [matMenuTriggerFor]="menu">
+                              <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+                              <button mat-menu-item (click)="editUser(user)">
+                                <mat-icon>edit</mat-icon>
+                                <span>Edit</span>
+                              </button>
+                              <button mat-menu-item (click)="user.disabled ? enableUser(user) : disableUser(user)">
+                                  <mat-icon>{{ user.disabled ? 'check_circle_outline' : 'highlight_off' }}</mat-icon>
+                                  <span>{{user.disabled ? 'Enable account' : 'Disable account'}}</span>
+                              </button>
+                              <button mat-menu-item (click)="deleteUser(user)">
+                                  <mat-icon>delete</mat-icon>
+                                  <span>Delete</span>
+                              </button>
+                            </mat-menu>
+                          </div>
+                          <mat-divider></mat-divider>
+                        </mat-list-item>
+                      </mat-list>
+                </ng-container>
+            </ng-container> 
+        </ng-container>
+      </ng-container>
     </mat-card-content>
   </mat-card>
 </div>
 <fa-user-form [edit]="userEdition" [user]="currentUser" (close)="closeUserDialog()" (save)="userEdition ? updateUser($event) : createUser($event)"></fa-user-form>
 <fa-confirm-modal></fa-confirm-modal>
+<ng-template #firebaseErrorTemplate>
+  <div fxFlex fxLayout="column" fxLayoutAlign="center center" style="margin: 50px; color: white; background: #F44336">
+    <span>Something went wrong initializing Firebase Admin.. It could be a mistake in the settings :</span>
+    <button mat-raised-button (click)="openSetup.emit()" style="margin: 15px;">VERIFY SETTINGS</button>
+  </div>
+</ng-template>
+<ng-template #noUsersTemplate>
+    <div fxFlex *ngIf="hasSettings && ! loadingUsers && (! users || (users && ! users.length)) && ! firebaseError" fxLayout="column" fxLayoutAlign="center center">
+      <span>You haven't any users yet</span>
+    </div> 
+</ng-template>
+<ng-template #noSettingsTemplate>
+    <fa-get-started *ngIf="! hasSettings" (openInBrowser)="openInBrowser.emit($event)"
+    (openSetup)="openSetup.emit($event)"></fa-get-started>
+</ng-template>
+<ng-template #loadingTemplate>
+  <div fxFlex *ngIf="hasSettings && loadingUsers" fxLayout="column" fxLayoutAlign="center center">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+</ng-template>

@@ -37,6 +37,8 @@ export class FirebaseAuthenticationComponent implements OnInit {
         'password': 'http://www.gstatic.com/mobilesdk/160409_mobilesdk/images/auth_service_email.svg'
     };
     currentUser: any;
+    firebaseError = false;
+    firstLoad = true;
 
     get hasSettings() {
         return this.settings && this.settings.path && this.settings.databaseUrl;
@@ -48,14 +50,31 @@ export class FirebaseAuthenticationComponent implements OnInit {
         this.listUsers();
     }
 
+    tryAuth(): Promise<any> {
+        return this.runQuery('firebase-user', 'initializeFirebaseAdmin');
+    }
+
     listUsers() {
+        this.firebaseError = false;
         this.loadingUsers = true;
-        this.runQuery('firebase-user', 'getAllUsers').then((result: any) => {
-            this.users = result.data;
-            this.loadingUsers = false;
-        }).catch((err) => {
-            this.loadingUsers = false;
-        });
+        this.tryAuth()
+            .then((result) => {
+                if (result.data && result.data.length && result.data[0].auth) {
+                   return this.runQuery('firebase-user', 'getAllUsers').then((result: any) => {
+                    this.firstLoad = false;
+                    this.users = result.data;
+                    this.loadingUsers = false;
+                });
+                } else {
+                    this.firstLoad = false;
+                    this.loadingUsers = false;
+                    this.firebaseError = true;
+                }
+            }).catch(() => {
+                this.firstLoad = false;
+                this.firebaseError = true;
+                this.loadingUsers = false;
+            });
     }
 
     newUser() {
