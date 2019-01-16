@@ -1,15 +1,15 @@
 strong {
-	cursor: pointer;
-	color: darkblue;
+	color: #262f3d;
 }
 .subtitle {
-	font-weight: 400;
+	font-weight: 600;
 	font-size: 15px;
 	margin-top: 10px;
-	text-decoration: underline;
+	color: #262f3d;
 }
 ul {
-	padding: 0 10px;
+	margin: 0 8px;
+	list-style: circle;
 	li {
 		margin: 5px 0;
 	}
@@ -19,4 +19,12 @@ ul {
 	color: darkred;
 	background: lightgray;
 	padding: 5px;
+}
+h1 {
+	border-bottom: solid;
+	color: #262f3d;
+	border-width: 0.5px;
+	border-color: #757575;
+	font-weight: 600;
+	font-size: 18px;
 }
