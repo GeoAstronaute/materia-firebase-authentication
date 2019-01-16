@@ -8,17 +8,17 @@ export default class FirebaseAuthentication {
 
 
     public static installSettings = [{
-            name: 'path',
-            description: 'Relative path to your firebase service account key file .json',
-            type: 'string',
-            required: true
-        },
-        {
-            name: 'databaseUrl',
-            description: 'Your firebase database url',
-            type: 'string',
-            required: true
-        }
+        name: 'path',
+        description: 'Relative path to your firebase service account key file .json',
+        type: 'string',
+        required: true
+    },
+    {
+        name: 'databaseUrl',
+        description: 'Your firebase database url',
+        type: 'string',
+        required: true
+    }
     ];
 
     signupParams: any[];
@@ -26,21 +26,13 @@ export default class FirebaseAuthentication {
     disabled: boolean;
 
     constructor(private app: any, private config: any, private express: any) {
-        if ( ! FirebaseAuthentication.initialize && this.config.path && this.config.databaseUrl) {
-            const serviceAccount = require(path.join(this.app.path, config.path));
-            admin.initializeApp({
-                credential: admin.credential.cert(serviceAccount),
-                databaseURL: config.databaseUrl
-            });
-            FirebaseAuthentication.initialize = true;
-        }
     }
 
     start() {
-        this._addPermissions();
+        this._addPermission();
     }
 
-    private _addPermissions() {
+    private _addPermission() {
         this.app.api.permissions.add({
             name: 'Firebase Connected User ID',
             description: 'Inject Firebase User uid',

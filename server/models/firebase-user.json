@@ -45,6 +45,15 @@
   "relations": [],
   "queries": [
     {
+      "id": "initializeFirebaseAdmin",
+      "type": "custom",
+      "opts": {
+        "params": [],
+        "action": "tryAuth",
+        "model": "firebase-authentication"
+      }
+    },
+    {
       "id": "list",
       "type": "custom",
       "opts": {
