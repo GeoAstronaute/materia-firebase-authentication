@@ -40,7 +40,7 @@ export class FirebaseAuthenticationComponent implements OnInit {
     firstLoad = true;
 
     get hasSettings() {
-        return this.settings && this.settings.path && this.settings.databaseUrl;
+        return this.settings && this.settings.serviceAccountCredentialsPath && this.settings.databaseUrl;
     }
 
     constructor(private http: HttpClient, private dialog: MatDialog, private snackBar: MatSnackBar) { }
@@ -148,8 +148,8 @@ export class FirebaseAuthenticationComponent implements OnInit {
     }
 
     deleteUser(user) {
-        this.confirmModComp.message = `Are you sure you want to delete user: '${user.email}' ?`;
-        this.confirmModComp.messageDetail = 'this action is irreversible.';
+        this.confirmModComp.message = `Are you sure you want to delete user with email: "${user.email}" ?`;
+        this.confirmModComp.messageDetail = 'Be carefull, this action is irreversible.';
         this.confirmModComp.buttonNames = ['CANCEL', 'CONFIRM'];
         const confirmModal = this.dialog.open(this.confirmModComp.template);
         confirmModal.afterClosed().subscribe((result) => {

@@ -6,20 +6,6 @@ export default class FirebaseAuthentication {
     public static displayName = 'Firebase Authentication';
     public static logo =
     'https://raw.githubusercontent.com/materiahq/materia-website-content/master/logo/addons/firebase-authentication.png';
-    public static installSettings = [
-        {
-            name: 'path',
-            description: 'Relative path to your firebase service account key file .json',
-            type: 'string',
-            required: true
-        },
-        {
-            name: 'databaseUrl',
-            description: 'Your firebase database url',
-            type: 'string',
-            required: true
-        }
-    ];
 
     firebaseAdminLib: FirebaseAdmin;
 

@@ -1,0 +1,20 @@
+form {
+  width: 350px;
+  mat-toolbar {
+    background: #262f3d;
+    color: white;
+    font-weight: 200;
+  }
+  .field {
+    margin: 15px;
+    mat-form-field {
+      margin: 0;
+    }
+  }
+  .footer {
+    margin-top: 10px;
+    button {
+      margin: 5px;
+    }
+  }
+}

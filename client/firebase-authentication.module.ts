@@ -26,7 +26,11 @@ import {
 
 import { FirebaseAuthenticationComponent } from './components/firebase-authentication/firebase-authentication.component';
 import { GetStartedComponent } from './components/firebase-authentication/get-started/get-started.component';
-import { UserFormComponent, ConfirmModalComponent } from './dialogs';
+import {
+  UserFormComponent,
+  ConfirmModalComponent,
+  FirebaseAuthenticationSetupComponent
+} from './dialogs';
 
 export const UI_MODULES = [
   MatButtonModule,
@@ -58,7 +62,16 @@ export const UI_MODULES = [
     HttpClientModule,
     ...UI_MODULES
   ],
-  declarations: [FirebaseAuthenticationComponent, GetStartedComponent, UserFormComponent, ConfirmModalComponent],
-  exports: [FirebaseAuthenticationComponent]
+  declarations: [
+    FirebaseAuthenticationComponent,
+    FirebaseAuthenticationSetupComponent,
+    GetStartedComponent,
+    UserFormComponent,
+    ConfirmModalComponent
+  ],
+  exports: [
+    FirebaseAuthenticationComponent,
+    FirebaseAuthenticationSetupComponent
+  ]
 })
 export class FirebaseAuthenticationModule {}

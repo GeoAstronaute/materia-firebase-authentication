@@ -20,7 +20,7 @@ export class FirebaseAdmin {
 
   initialize(): Promise<any> {
     this.reloadConfig();
-    if (this.config.path && this.config.databaseUrl) {
+    if (this.config.serviceAccountCredentialsPath && this.config.databaseUrl) {
       let p = Promise.resolve();
       if (!FirebaseAdmin.auth || (FirebaseAdmin.auth && this.configChanges())) {
         if (admin.apps.length) {
@@ -30,7 +30,7 @@ export class FirebaseAdmin {
           try {
             const serviceAccount = require(join(
               this.app.path,
-              this.config.path
+              this.config.serviceAccountCredentialsPath
             ));
             admin.initializeApp({
               credential: admin.credential.cert(serviceAccount),
@@ -38,7 +38,7 @@ export class FirebaseAdmin {
             });
             FirebaseAdmin.auth = true;
             FirebaseAdmin.config = {
-              path: join(this.app.path, this.config.path),
+              path: join(this.app.path, this.config.serviceAccountCredentialsPath),
               databaseUrl: this.config.databaseUrl
             };
           } catch (err) {
@@ -57,7 +57,7 @@ export class FirebaseAdmin {
   configChanges() {
     if (FirebaseAdmin.config && this.config) {
       return (
-        FirebaseAdmin.config.path !== join(this.app.path, this.config.path) ||
+        FirebaseAdmin.config.path !== join(this.app.path, this.config.serviceAccountCredentialsPath) ||
         FirebaseAdmin.config.databaseUrl !== this.config.databaseUrl
       );
     }

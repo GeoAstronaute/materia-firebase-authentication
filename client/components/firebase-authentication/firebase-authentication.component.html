@@ -51,7 +51,7 @@
                         </mat-list-item>
                       </mat-list>
                 </ng-container>
-            </ng-container> 
+            </ng-container>
         </ng-container>
       </ng-container>
     </mat-card-content>
@@ -68,7 +68,7 @@
 <ng-template #noUsersTemplate>
     <div fxFlex *ngIf="hasSettings && ! loadingUsers && (! users || (users && ! users.length)) && ! firebaseError" fxLayout="column" fxLayoutAlign="center center">
       <span>You haven't any users yet</span>
-    </div> 
+    </div>
 </ng-template>
 <ng-template #noSettingsTemplate>
     <fa-get-started *ngIf="! hasSettings" (openInBrowser)="openInBrowser.emit($event)"
