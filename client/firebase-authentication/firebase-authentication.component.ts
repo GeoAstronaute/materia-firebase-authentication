@@ -70,7 +70,7 @@ export class FirebaseAuthenticationComponent implements OnInit {
                     this.loadingUsers = false;
                     this.firebaseError = true;
                 }
-            }).catch(() => {
+            }).catch((err) => {
                 this.firstLoad = false;
                 this.firebaseError = true;
                 this.loadingUsers = false;
