@@ -8,12 +8,12 @@ class FirebaseAuthenticationModel {
         this.firebaseAdminLib = new FirebaseAdmin(this.app);
     }
 
-    tryAuth() {
-        return this.firebaseAdminLib.tryAuth();
+    initializeFirebaseAdmin() {
+        return this.firebaseAdminLib.initialize();
     }
 
     isAuth() {
-        return this.firebaseAdminLib.auth ? Promise.resolve() : Promise.reject(new Error('Unable to initialize Firebase admin SDK'));
+        return FirebaseAdmin.auth ? Promise.resolve() : Promise.reject(new Error('Unable to initialize Firebase admin SDK'));
     }
 
     getAllUsers(params) {
