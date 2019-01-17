@@ -5,9 +5,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { AddonView } from '@materia/addons';
 
-import { FirebaseUser } from '../models/firebase-user.model';
-import { UserFormComponent } from '../dialogs/user-form/user-form.component';
-import { ConfirmModalComponent } from '../dialogs/confirm-modal';
+import { FirebaseUser } from '../../models/firebase-user.model';
+import { UserFormComponent, ConfirmModalComponent } from '../../dialogs';
 
 @AddonView('@materia/firebase-authentication')
 @Component({
@@ -60,9 +59,9 @@ export class FirebaseAuthenticationComponent implements OnInit {
         this.tryAuth()
             .then((result) => {
                 if (result.data && result.data.length && result.data[0].auth) {
-                   return this.runQuery('firebase-user', 'getAllUsers').then((result: any) => {
+                   return this.runQuery('firebase-user', 'getAllUsers').then((allUsersResult: any) => {
                     this.firstLoad = false;
-                    this.users = result.data;
+                    this.users = allUsersResult.data;
                     this.loadingUsers = false;
                 });
                 } else {

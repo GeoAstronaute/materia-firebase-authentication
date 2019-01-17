@@ -4,7 +4,8 @@ import { FirebaseAdmin } from './lib/firebase-admin';
 export default class FirebaseAuthentication {
     public static initialize: boolean;
     public static displayName = 'Firebase Authentication';
-    public static logo = 'https://raw.githubusercontent.com/materiahq/materia-website-content/master/logo/addons/firebase-authentication.png';
+    public static logo =
+    'https://raw.githubusercontent.com/materiahq/materia-website-content/master/logo/addons/firebase-authentication.png';
     public static installSettings = [
         {
             name: 'path',

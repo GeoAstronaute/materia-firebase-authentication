@@ -11,7 +11,6 @@ export class GetStartedComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }
