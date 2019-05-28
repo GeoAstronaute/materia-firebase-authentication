@@ -3,14 +3,14 @@
     {{ edit ? 'Edit' : 'New user' }}
   </mat-toolbar>
   <form fxLayout="column" [formGroup]="form">
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email" [required]=" ! edit">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Password" type="password" formControlName="password" [required]=" ! edit">
+    </mat-form-field>
     <mat-form-field *ngIf=" ! edit">
       <input matInput placeholder="User id" formControlName="uid">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Email" formControlName="email">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Password" type="password" formControlName="password">
     </mat-form-field>
     <mat-slide-toggle formControlName="emailVerified">
       Email verified
