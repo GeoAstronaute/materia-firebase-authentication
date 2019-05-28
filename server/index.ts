@@ -43,7 +43,8 @@ export default class FirebaseAuthentication {
                     res.status(401).send(new Error('Unauthorized'));
                 }
             },
-            readOnly: true
+            readOnly: true,
+            fromAddon: this.app.addons.get('@materia/firebase-authentication').toJson()
         });
     }
 }
