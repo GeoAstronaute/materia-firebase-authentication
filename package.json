@@ -1,6 +1,6 @@
 {
   "name": "@materia/firebase-authentication",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "Manage and identify your Firebase users in your Materia applications",
   "repository": {
     "type": "git",
